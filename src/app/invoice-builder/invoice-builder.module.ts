@@ -7,9 +7,9 @@ import { InvoiceBuilderComponent } from './invoice-builder.component';
 @NgModule({
   imports: [
     CommonModule,
-    InvoiceBuilderRoutingModule,
-    InvoiceBuilderComponent
+    InvoiceBuilderRoutingModule
   ],
-  declarations: []
+  declarations: [    InvoiceBuilderComponent
+  ]
 })
 export class InvoiceBuilderModule { }
