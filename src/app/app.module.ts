@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { MaterialModule } from './shared/material.module';
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
