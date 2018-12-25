@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InvoiceBuilderComponent } from './invoice-builder.component';
+import { MainContentComponent } from './component/main-content/main-content.component';
 
 const routes: Routes = [{
   path:'',
-  component:InvoiceBuilderComponent
+  component:InvoiceBuilderComponent,
+  children:[
+    {
+    path:'',
+    component:MainContentComponent    
+    }
+  ]
 }];
 
 @NgModule({

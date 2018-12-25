@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
   path: 'invoice-builder',
-  loadChildren:'./invoice-builder.module#InvoiceBuilderModule'
+  loadChildren:'./invoice-builder/invoice-builder.module#InvoiceBuilderModule'
 },{
   path:'**',
   redirectTo:'invoice-builder'
