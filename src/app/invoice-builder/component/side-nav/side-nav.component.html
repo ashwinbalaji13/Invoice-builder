@@ -1,8 +1,16 @@
 
 <mat-sidenav-container class="app-sidenav-container">
-    <mat-sidenav class="app-sidenav" #sidenav>
-      Sidenav content
-    </mat-sidenav>
+    <mat-sidenav class="app-sidenav" class="app-sidenav mat-elevation-z10"
+    opened="true"
+    mode="push"
+    #sidenav>
+            <mat-toolbar color="primary">Dashboard</mat-toolbar>
+            <mat-list>
+                    <mat-list-item> Item1 </mat-list-item>
+                    <mat-list-item> Item2 </mat-list-item>
+                    <mat-list-item> Item3 </mat-list-item>
+                   </mat-list>
+        </mat-sidenav>
    
     <div class="app-sidenav-content">
             <app-toolbar></app-toolbar>
