@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InvoiceBuilderRoutingModule } from './invoice-builder-routing.module';
-import { InvoiceBuilderComponent } from './invoice-builder.component';
+
 import { MainContentComponent } from './component/main-content/main-content.component';
 import { SideNavComponent } from './component/side-nav/side-nav.component';
 import { ToolbarComponent } from './component/toolbar/toolbar.component';
 import { MaterialModule } from '../shared/material.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    InvoiceBuilderRoutingModule,
+    DashboardRoutingModule,
     MaterialModule
   ],
   declarations: [   
-     InvoiceBuilderComponent, MainContentComponent, SideNavComponent, ToolbarComponent
+     DashboardComponent, MainContentComponent, SideNavComponent, ToolbarComponent
   ]
 })
-export class InvoiceBuilderModule { }
+export class DashboardModule { }
