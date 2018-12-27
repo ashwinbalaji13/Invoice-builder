@@ -8,12 +8,16 @@ import { ToolbarComponent } from './component/toolbar/toolbar.component';
 import { MaterialModule } from '../shared/material.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { InvoicesModule } from '../invoices/invoices.module';
+import { ClientModule } from '../client/client.module';
 
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    InvoicesModule,
+    ClientModule
   ],
   declarations: [   
      DashboardComponent, MainContentComponent, SideNavComponent, ToolbarComponent
