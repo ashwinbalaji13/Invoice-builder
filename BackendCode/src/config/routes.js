@@ -3,3 +3,4 @@ import invoiceController from "../api/controllers/invoice.controller";
 export let router = express.Router();
 
 router.get("/invoices", invoiceController.findAll);
+router.post("/invoices", invoiceController.create);
