@@ -1,4 +1,5 @@
 import Invoice from '../models/invoice.models';
+import HttpRequest from 'http-status-codes';
 import Joi from 'joi';
 export default {
   findAll(req, res, next) {
@@ -6,7 +7,7 @@ export default {
     Invoice.find()
       .then(invoices => res.json(invoices))
       .catch(err => {
-        return res.status(400).json(error);
+        return res.status(HttpRequest.INTERNAL_SERVER_ERROR).json(error);
       });
   },
   create(req, res, next) {
@@ -28,7 +29,7 @@ export default {
     const { error, value } = Joi.validate(req.body, schema);
     // console.log('value of req', value);
     if (error && error.details) {
-      return res.status(400).json(error);
+      return res.status(HttpRequest.BAD_REQUEST).json(error);
     }
 
     Invoice.create(value)
