@@ -1,0 +1,79 @@
+{
+  "title": "Invoice builder",
+  "description": "This is a invoice builder app.",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+  },
+  "version": "1.0.0",
+  "host": "localhost:3000",
+  "basepath": "/api",
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "invoices",
+      "description": "API for invoice"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/invoices": {
+      "post": {
+        "tags": ["invoices"],
+        "summary": "create new invoice",
+        "description": "create new invoice in the system",
+        "parameters": [
+          {
+            "name": "Invoice",
+            "description": "Invoice creation",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#definitions/Invoice" }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "new invoice is created",
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Invoice": {
+      "required": ["item", "qty", "date"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "item": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "rate": {
+          "type": "number"
+        },
+        "tax": {
+          "type": "number"
+        },
+        "due": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}
