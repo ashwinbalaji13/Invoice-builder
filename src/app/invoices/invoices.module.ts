@@ -1,15 +1,22 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { InvoiceListingComponent } from "./component/invoice-listing/invoice-listing.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../shared/material.module";
 import { InvoiceService } from "./services/invoice.service";
 import { HttpClientModule } from "@angular/common/http";
+import { InvoiceFormComponent } from "../invoice/component/invoice-form/invoice-form.component";
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule,MaterialModule, FormsModule,],
-  declarations: [InvoiceListingComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  declarations: [InvoiceListingComponent, InvoiceFormComponent],
   exports: [InvoiceListingComponent],
-  providers: [InvoiceService ]
+  providers: [InvoiceService]
 })
 export class InvoicesModule {}
