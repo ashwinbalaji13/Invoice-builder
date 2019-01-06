@@ -29,6 +29,10 @@ const routes: Routes = [
         component: InvoiceFormComponent
       },
       {
+        path: "invoice/:id",
+        component: InvoiceFormComponent
+      },
+      {
         path: "**",
         redirectTo: "invoice"
       }

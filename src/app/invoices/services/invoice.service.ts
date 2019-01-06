@@ -10,4 +10,10 @@ export class InvoiceService {
   getInvoices(): Observable<Invoice[]> {
     return this.httpClient.get<Invoice[]>(`${BASE_URL}/invoices`);
   }
+  postInvoices(invoice): Observable<Invoice> {
+    return this.httpClient.post<Invoice>(`${BASE_URL}/invoices`, invoice);
+  }
+  deleteInvoice(id): Observable<Invoice> {
+    return this.httpClient.delete<Invoice>(`${BASE_URL}/invoices/${id}`);
+  }
 }

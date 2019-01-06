@@ -1,12 +1,26 @@
 <mat-card>
+  <h3>Create New Invoice</h3>
   {{ this.invoiceForm.value | json }}
   <form
     class="form-container"
     [formGroup]="invoiceForm"
-    (ngSubmit)="validate()"
+    (ngSubmit)="postData()"
   >
     <mat-form-field>
-      <input matInput placeholder="Item" type="string" formControlName="item" />
+      <input
+        matInput
+        placeholder="Item"
+        type="string"
+        formControlName="item"
+        required
+      />
+      <mat-error
+        *ngIf="
+          invoiceForm.controls.item.invalid && invoiceForm.controls.item.touched
+        "
+      >
+        Item is required</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -14,9 +28,17 @@
         [matDatepicker]="date"
         placeholder="Choose a date"
         formControlName="date"
+        color="accent"
       />
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
+      <mat-error
+        *ngIf="
+          invoiceForm.controls.date.invalid && invoiceForm.controls.date.touched
+        "
+      >
+        Date is required</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -27,6 +49,13 @@
       />
       <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
       <mat-datepicker #due></mat-datepicker>
+      <mat-error
+        *ngIf="
+          invoiceForm.controls.due.invalid && invoiceForm.controls.due.touched
+        "
+      >
+        due date is required</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -43,7 +72,14 @@
       <input matInput placeholder="Rate" type="number" formControlName="rate" />
     </mat-form-field>
     <div>
-      <button mat-raised-button type="submit" color="accent">Save</button>
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!invoiceForm.valid"
+        color="accent"
+      >
+        Save
+      </button>
       <button mat-raised-button type="reset">Reset</button>
     </div>
   </form>
