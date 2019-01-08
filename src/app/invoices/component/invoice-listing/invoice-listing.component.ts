@@ -4,6 +4,8 @@ import { Invoice } from "../../models/invoice";
 import { Route, Router } from "@angular/router";
 import { MatSnackBar, MatPaginator } from "@angular/material";
 import { remove } from "lodash";
+import "rxjs/Rx";
+
 @Component({
   selector: "app-invoice-listing",
   templateUrl: "./invoice-listing.component.html",
@@ -14,10 +16,9 @@ export class InvoiceListingComponent implements OnInit {
     private invoiceService: InvoiceService,
     private route: Router,
     private snackbar: MatSnackBar
-  ) {
-  }
-  public responseLength=0;
-  @ViewChild(MatPaginator) paginator:MatPaginator; 
+  ) {}
+  public responseLength = 0;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = [
     "item",
     "date",
@@ -30,32 +31,36 @@ export class InvoiceListingComponent implements OnInit {
   dataSource: Invoice[];
 
   ngOnInit() {
-    debugger;
-    this.paginator.page.subscribe((result)=>{
-      console.log("inside",result);
-        this.invoiceService.getInvoices({page:result.pageIndex+1,perPage:result.pageSize}).subscribe(
-          data => {
-
-            this.dataSource = data.docs;
-            this.responseLength=data.total;
-            console.log(data);
-          },
-          err => {
-            console.error(err);
-          }
-        );
-    })
+    this.paginator.page
+      .flatMap(result => {
+        console.log("inside");
+        return this.invoiceService.getInvoices({
+          page: result.pageIndex + 1,
+          perPage: result.pageSize
+        });
+      })
+      .subscribe(
+        data => {
+          this.dataSource = data.docs;
+          this.responseLength = data.total;
+          // console.log(data);
+        },
+        err => {
+          console.error(err);
+        }
+      );
     this.processInformation();
   }
   saveNewInvoice() {
     this.route.navigate(["dashboard", "invoice", "new"]);
   }
-  processInformation(){
-    this.invoiceService.getInvoices({page:1,perPage:5}).subscribe(
+  processInformation() {
+    this.invoiceService.getInvoices({ page: 1, perPage: 5 }).subscribe(
       data => {
+        console.log("process info");
         this.dataSource = data.docs;
-        this.responseLength=this.dataSource.length;
-        console.log(data);
+        this.responseLength = data.total;
+        // console.log(data);
       },
       err => {
         console.error(err);
