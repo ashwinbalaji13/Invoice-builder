@@ -10,7 +10,8 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -30,7 +31,8 @@ const imprt = [
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatPaginatorModule
 ];
 @NgModule({
   imports: [...[imprt]],

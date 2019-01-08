@@ -47,6 +47,20 @@
         "tags": ["invoices"],
         "summary": "getting all invoices data from db",
         "description": "all invoices",
+        "parameters":[
+         {
+           "name":"page",
+           "type":"integer",
+           "description":"set the page for pagination",
+           "in":"query"
+         },
+         {
+          "name":"limit",
+          "type":"integer",
+          "description":"set the limit of data pagination",
+          "in":"query"
+        }
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -175,8 +189,25 @@
       }
     },
     "getInvoices": {
-      "type": "array",
+      "properties":{
+      "docs":{
+        "type": "array",
       "$ref": "#definitions/Invoice"
+      }  ,
+      "total":{
+        "type":"integer"
+      },
+      "page":{
+        "type":"integer"
+      },
+      "pages":{
+        "type":"integer"
+      },
+      "limit":{
+        "type":"integer"
+      }
+      }
+      
     }
   }
 }

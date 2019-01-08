@@ -4,7 +4,12 @@ import Joi from "joi";
 export default {
   findAll(req, res, next) {
     console.log("inside findAll");
-    Invoice.find()
+    const {page=1,limit=10}=req.query;
+    const options={
+      page:parseInt(page,10),
+      limit:parseInt(limit,10)
+    }
+    Invoice.paginate({},options)
       .then(invoices => res.json(invoices))
       .catch(err => {
         return res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json(error);
