@@ -11,7 +11,9 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatSnackBarModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule
 } from "@angular/material";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -32,7 +34,9 @@ const imprt = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSnackBarModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule
 ];
 @NgModule({
   imports: [...[imprt]],

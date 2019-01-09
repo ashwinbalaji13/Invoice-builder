@@ -59,7 +59,19 @@
           "type":"integer",
           "description":"set the limit of data pagination",
           "in":"query"
-        }
+        },
+         {
+          "name":"sortItem",
+          "type":"string",
+          "description":"Type the column name you need to sort",
+          "in":"query"
+        },
+        {
+         "name":"sortOrder",
+         "type":"string",
+         "description":"Mention asc or desc",
+         "in":"query"
+       }
         ],
         "responses": {
           "200": {

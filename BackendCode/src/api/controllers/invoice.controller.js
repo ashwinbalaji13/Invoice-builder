@@ -4,12 +4,24 @@ import Joi from "joi";
 export default {
   findAll(req, res, next) {
     console.log("inside findAll");
-    const {page=1,limit=10}=req.query;
+    const {page=1,limit=10,filter,sortItem,sortOrder}=req.query;
     const options={
       page:parseInt(page,10),
       limit:parseInt(limit,10)
     }
-    Invoice.paginate({},options)
+    let query={};
+    if(filter){
+      query.item={
+          $regex:filter
+      }
+    }
+    if(sortItem && sortOrder){
+      options.sort={
+        [sortItem]:sortOrder
+      }
+    }
+    console.log(options);
+    Invoice.paginate(query,options)
       .then(invoices => res.json(invoices))
       .catch(err => {
         return res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json(error);
