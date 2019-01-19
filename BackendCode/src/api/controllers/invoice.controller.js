@@ -4,24 +4,24 @@ import Joi from "joi";
 export default {
   findAll(req, res, next) {
     console.log("inside findAll");
-    const {page=1,limit=10,filter,sortItem,sortOrder}=req.query;
-    const options={
-      page:parseInt(page,10),
-      limit:parseInt(limit,10)
+    const { page = 1, limit = 10, filter, sortItem, sortOrder } = req.query;
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10)
+    };
+    let query = {};
+    if (filter) {
+      query.item = {
+        $regex: filter
+      };
     }
-    let query={};
-    if(filter){
-      query.item={
-          $regex:filter
-      }
-    }
-    if(sortItem && sortOrder){
-      options.sort={
-        [sortItem]:sortOrder
-      }
+    if (sortItem && sortOrder) {
+      options.sort = {
+        [sortItem]: sortOrder
+      };
     }
     console.log(options);
-    Invoice.paginate(query,options)
+    Invoice.paginate(query, options)
       .then(invoices => res.json(invoices))
       .catch(err => {
         return res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json(error);
@@ -54,9 +54,7 @@ export default {
         res.json(invoice);
       })
       .catch(err => {
-        res
-          .status(HttpServerCodes.INTERNAL_SERVER_ERROR)
-          .json({ err: "error while inserting data" });
+        res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json({ err: "error while inserting data" });
       });
   },
   findOne(req, res) {
@@ -64,16 +62,12 @@ export default {
     Invoice.findById(id)
       .then(invoice => {
         if (!invoice) {
-          return res
-            .status(HttpServerCodes.NOT_FOUND)
-            .json({ err: "could not find any voice" });
+          return res.status(HttpServerCodes.NOT_FOUND).json({ err: "could not find any voice" });
         }
         return res.json(invoice);
       })
       .catch(err => {
-        res
-          .status(HttpServerCodes.INTERNAL_SERVER_ERROR)
-          .json({ err: "error while inserting data" });
+        res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json({ err: "error while inserting data" });
       });
   },
   deleteRecord(req, res) {
@@ -81,16 +75,12 @@ export default {
     Invoice.findByIdAndDelete(id)
       .then(invoice => {
         if (!invoice) {
-          return res
-            .status(HttpServerCodes.NOT_FOUND)
-            .json({ err: "could not find the record" });
+          return res.status(HttpServerCodes.NOT_FOUND).json({ err: "could not find the record" });
         }
         return res.json(invoice);
       })
       .catch(err => {
-        res
-          .status(HttpServerCodes.INTERNAL_SERVER_ERROR)
-          .json({ err: "error while inserting data" });
+        res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json({ err: "error while inserting data" });
       });
   },
   update(req, res) {
@@ -110,16 +100,12 @@ export default {
     Invoice.findOneAndUpdate({ _id: id }, value, { new: true })
       .then(invoice => {
         if (!invoice) {
-          return res
-            .status(HttpServerCodes.NOT_FOUND)
-            .json({ err: "could not find the record" });
+          return res.status(HttpServerCodes.NOT_FOUND).json({ err: "could not find the record" });
         }
         return res.json(invoice);
       })
       .catch(err => {
-        res
-          .status(HttpServerCodes.INTERNAL_SERVER_ERROR)
-          .json({ err: "error while updating data" });
+        res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json({ err: "error while updating data" });
       });
   }
 };
