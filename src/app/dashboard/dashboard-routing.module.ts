@@ -5,7 +5,7 @@ import { MainContentComponent } from "./component/main-content/main-content.comp
 import { DashboardComponent } from "./dashboard.component";
 import { InvoiceListingComponent } from "../invoices/component/invoice-listing/invoice-listing.component";
 import { ClientListingComponent } from "../client/component/client-listing/client-listing.component";
-import { InvoiceFormComponent } from "../invoice/component/invoice-form/invoice-form.component";
+import { InvoiceFormComponent } from "src/app/invoices/component/invoice-form/invoice-form.component";
 
 const routes: Routes = [
   {
