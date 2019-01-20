@@ -47,31 +47,31 @@
         "tags": ["invoices"],
         "summary": "getting all invoices data from db",
         "description": "all invoices",
-        "parameters":[
-         {
-           "name":"page",
-           "type":"integer",
-           "description":"set the page for pagination",
-           "in":"query"
-         },
-         {
-          "name":"limit",
-          "type":"integer",
-          "description":"set the limit of data pagination",
-          "in":"query"
-        },
-         {
-          "name":"sortItem",
-          "type":"string",
-          "description":"Type the column name you need to sort",
-          "in":"query"
-        },
-        {
-         "name":"sortOrder",
-         "type":"string",
-         "description":"Mention asc or desc",
-         "in":"query"
-       }
+        "parameters": [
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "set the page for pagination",
+            "in": "query"
+          },
+          {
+            "name": "limit",
+            "type": "integer",
+            "description": "set the limit of data pagination",
+            "in": "query"
+          },
+          {
+            "name": "sortItem",
+            "type": "string",
+            "description": "Type the column name you need to sort",
+            "in": "query"
+          },
+          {
+            "name": "sortOrder",
+            "type": "string",
+            "description": "Mention asc or desc",
+            "in": "query"
+          }
         ],
         "responses": {
           "200": {
@@ -170,6 +170,9 @@
         "due": {
           "type": "string",
           "format": "date"
+        },
+        "client": {
+          "type": "string"
         }
       }
     },
@@ -201,25 +204,24 @@
       }
     },
     "getInvoices": {
-      "properties":{
-      "docs":{
-        "type": "array",
-      "$ref": "#definitions/Invoice"
-      }  ,
-      "total":{
-        "type":"integer"
-      },
-      "page":{
-        "type":"integer"
-      },
-      "pages":{
-        "type":"integer"
-      },
-      "limit":{
-        "type":"integer"
+      "properties": {
+        "docs": {
+          "type": "array",
+          "$ref": "#definitions/Invoice"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pages": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
       }
-      }
-      
     }
   }
 }

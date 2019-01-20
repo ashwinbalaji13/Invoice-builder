@@ -1,9 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import { router } from "./config/routes";
+// import { router } from "./config/routes";
 import logger from "morgan";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger.json";
+import { restRouter } from "./api/index.js";
 
 let app = express();
 app.use(logger("dev"));
@@ -17,7 +18,7 @@ app.use(
   })
 );
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -35,7 +36,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api", router);
+app.use("/api", restRouter);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
