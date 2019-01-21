@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from '../../client.service';
+import { Client } from '../../models/client';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-client-listing',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientListingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private clientService:ClientService) { }
+  displayedColumns = ["First Name", "Last Name", "Email"];
+  dataSource = new MatTableDataSource<Client>();
 
   ngOnInit() {
+    this.clientService.getClients().subscribe(data=>{
+      this.dataSource.data=data;
+    })
   }
+
 
 }
