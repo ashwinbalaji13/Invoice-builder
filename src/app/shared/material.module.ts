@@ -13,7 +13,8 @@ import {
   MatSnackBarModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSortModule
+  MatSortModule,
+  MatDialogModule
 } from "@angular/material";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -36,7 +37,8 @@ const imprt = [
   MatSnackBarModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSortModule
+  MatSortModule,
+  MatDialogModule
 ];
 @NgModule({
   imports: [...[imprt]],
