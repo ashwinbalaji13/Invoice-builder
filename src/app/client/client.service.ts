@@ -12,4 +12,7 @@ export class ClientService {
   getClients():Observable<Client[]>{
     return this.httpClient.get<Client[]>(`${BASE_URL}/clients`)
   }
+  postClient(body:Client):Observable<Client>{
+    return this.httpClient.post<Client>(`${BASE_URL}/clients`,body)
+  }
 }

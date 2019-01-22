@@ -1,9 +1,13 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { ClientService } from "../../client.service";
 import { Client } from "../../models/client";
-import { MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from "@angular/material";
 import { ClientFormDialog } from "../client-dialog-form";
 import { FormDialogComponent } from "../../form-dialog/form-dialog.component";
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/filter';
+
+
 
 @Component({
   selector: "app-client-listing",
@@ -11,27 +15,50 @@ import { FormDialogComponent } from "../../form-dialog/form-dialog.component";
   styleUrls: ["./client-listing.component.scss"]
 })
 export class ClientListingComponent implements OnInit {
-  animal: string;
-  name: string;
-  constructor(private clientService: ClientService, public dialog: MatDialog) {}
+  firstName: string;
+  lastName: string;
+  email:string;
+  constructor(private clientService: ClientService, private dialog: MatDialog,private snackbar:MatSnackBar) {}
   displayedColumns = ["First Name", "Last Name", "Email"];
   dataSource = new MatTableDataSource<Client>();
+  progressBar = false;
 
   ngOnInit() {
-    this.clientService.getClients().subscribe(data => {
-      this.dataSource.data = data;
-    });
+    this.progressBar = true;
+      this.clientService.getClients().subscribe(data => {
+
+        this.progressBar = false;
+      
+        this.dataSource.data = data;
+      });
+   
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       width: "400px",
       height: "350px",
-      data: { name: this.name, animal: this.animal }
+      data: {firstName:this.firstName,lastName:this.lastName,email:this.email  }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().filter(clientParam=>typeof clientParam==='object').subscribe(result => {
       console.log("The dialog was closed");
-      this.animal = result;
-    });
-  }
+      // debugger;
+      this.progressBar = true;
+      this.clientService.postClient(result).subscribe((result)=>{
+        this.dataSource.data.push(result);
+        this.progressBar = false;
+        this.dataSource.data=[...this.dataSource.data]
+        this.snackbar.open("Client Created", "Success", {
+          duration: 5000
+        }); 
+      }), err => {
+        this.snackbar.open(err.message, "Failed", {
+          duration: 5000
+        });
+    }
+  }),()=>{
+    this.progressBar = false;
+
+  };
+}
 }

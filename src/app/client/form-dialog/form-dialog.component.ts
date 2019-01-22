@@ -1,29 +1,31 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export interface DialogData {
-  animal: string;
-  name: string;
+  firstName: string;
+  lastName: string;
+  email:string;
 }
 @Component({
   selector: "app-form-dialog",
-  template: `
-    <h1 mat-dialog-title>Hi {{ data.name }}</h1>
-    <div mat-dialog-content>
-      <p>What's your favorite animal?</p>
-      <mat-form-field> <input matInput [(ngModel)]="data.animal" /> </mat-form-field>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-    </div>
-  `,
+  templateUrl: './form-dialog.component.html',
   styleUrls: ["./form-dialog.component.scss"]
 })
 export class FormDialogComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<FormDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+ clientForm:FormGroup;
+  constructor(public dialogRef: MatDialogRef<FormDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,private fb:FormBuilder) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.initClientForm();
+  }
+  private initClientForm(){
+    this.clientForm=this.fb.group({
+      firstName:['',Validators.required],
+      lastName:['',Validators.required],
+      email:['',Validators.required]
+    })
+  }
 }
