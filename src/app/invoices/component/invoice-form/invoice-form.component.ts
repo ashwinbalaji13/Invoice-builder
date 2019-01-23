@@ -4,7 +4,11 @@ import { InvoiceService } from "src/app/invoices/services/invoice.service";
 import { MatSnackBar } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Invoice } from "src/app/invoices/models/invoice";
-
+import { ClientService } from "src/app/client/client.service";
+export interface Food {
+  value: String;
+  viewValue: String;
+}
 @Component({
   selector: "app-invoice-form",
   templateUrl: "./invoice-form.component.html",
@@ -14,17 +18,21 @@ export class InvoiceFormComponent implements OnInit {
    invoice:Invoice;
   invoiceForm: FormGroup;
   id:string;
+  foods: Food[] = [
+  ];
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private snackbar: MatSnackBar,
     private route: Router,
-    private activatedRouter:ActivatedRoute
+    private activatedRouter:ActivatedRoute,
+    private clientService:ClientService
   ) {}
 
   ngOnInit() {
     this.createForm();
     this.getInvoiceById();
+    this.setClient();
   }
   postData() {
     if(this.invoice){
@@ -76,6 +84,15 @@ export class InvoiceFormComponent implements OnInit {
       })
     })
   }
+  setClient(){
+    this.clientService.getClients().subscribe(result=>{
+        for(let i=0;i<result.length;i++){
+          this.foods.push({value: result[i]._id , viewValue: result[i].firstName+' '+result[i].lastName});
+        }
+debugger;
+
+    })
+  }
   createForm() {
     this.invoiceForm = this.fb.group({
       item: ["", Validators.required],
@@ -83,7 +100,8 @@ export class InvoiceFormComponent implements OnInit {
       due: ["", Validators.required],
       qty: "",
       rate: "",
-      tax: ""
+      tax: "",
+      client:["", Validators.required]
     });
   }
 }

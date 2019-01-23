@@ -10,6 +10,7 @@ import { ClientService } from "../client.service";
 })
 export class FormDialogComponent implements OnInit {
   clientForm: FormGroup;
+  title;
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,6 +24,7 @@ export class FormDialogComponent implements OnInit {
   }
   ngOnInit() {
     this.initClientForm();
+    this.title=this.data.title;
     if (this.data && this.data.id) {
       this.clientService.getClientById(this.data.id).subscribe(result => {
         debugger;
