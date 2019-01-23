@@ -24,10 +24,9 @@ export class FormDialogComponent implements OnInit {
   }
   ngOnInit() {
     this.initClientForm();
-    this.title=this.data.title;
+    this.title = this.data.title;
     if (this.data && this.data.id) {
       this.clientService.getClientById(this.data.id).subscribe(result => {
-        debugger;
         this.clientForm.patchValue(result);
       }),
         err => {

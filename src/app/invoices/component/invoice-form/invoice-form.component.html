@@ -1,96 +1,44 @@
 <mat-card>
   <h3>Create New Invoice</h3>
   {{ this.invoiceForm.value | json }}
-  <form
-    class="form-container"
-    [formGroup]="invoiceForm"
-    (ngSubmit)="postData()"
-  >
+  <form class="form-container" [formGroup]="invoiceForm" (ngSubmit)="postData()">
     <mat-form-field>
-      <input
-        matInput
-        placeholder="Item"
-        type="string"
-        formControlName="item"
-        required
-      />
-      <mat-error
-        *ngIf="
-          invoiceForm.controls.item.invalid && invoiceForm.controls.item.touched
-        "
-      >
+      <input matInput placeholder="Item" type="string" formControlName="item" required />
+      <mat-error *ngIf="invoiceForm.controls.item.invalid && invoiceForm.controls.item.touched">
         Item is required</mat-error
       >
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="date"
-        placeholder="Choose a date"
-        formControlName="date"
-        color="accent"
-      />
+      <input matInput [matDatepicker]="date" placeholder="Choose a date" formControlName="date" color="accent" />
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
-      <mat-error
-        *ngIf="
-          invoiceForm.controls.date.invalid && invoiceForm.controls.date.touched
-        "
-      >
+      <mat-error *ngIf="invoiceForm.controls.date.invalid && invoiceForm.controls.date.touched">
         Date is required</mat-error
       >
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        [matDatepicker]="due"
-        placeholder="Due date"
-        formControlName="due"
-      />
+      <input matInput [matDatepicker]="due" placeholder="Due date" formControlName="due" />
       <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
       <mat-datepicker #due></mat-datepicker>
-      <mat-error
-        *ngIf="
-          invoiceForm.controls.due.invalid && invoiceForm.controls.due.touched
-        "
-      >
-        due date is required</mat-error
-      >
+      <mat-error *ngIf="invoiceForm.controls.due.invalid && invoiceForm.controls.due.touched">
+        due date is required
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Quantity"
-        type="number"
-        formControlName="qty"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Tax" type="number" formControlName="tax" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Rate" type="number" formControlName="rate" />
-    </mat-form-field>
+    <mat-form-field> <input matInput placeholder="Quantity" type="number" formControlName="qty" /> </mat-form-field>
+    <mat-form-field> <input matInput placeholder="Tax" type="number" formControlName="tax" /> </mat-form-field>
+    <mat-form-field> <input matInput placeholder="Rate" type="number" formControlName="rate" /> </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Favorite food" formControlName="client">
-        <mat-option *ngFor="let food of foods" [value]="food.value" > 
-          {{food.viewValue}}
-        </mat-option>
+      <mat-select placeholder="Please select your client" formControlName="client">
+        <mat-option *ngFor="let food of foods" [value]="food.value"> {{ food.viewValue }} </mat-option>
+        <mat-error *ngIf="invoiceForm.controls.client.invalid && invoiceForm.controls.client.touched"
+          >Client is required</mat-error
+        >
       </mat-select>
     </mat-form-field>
 
-
-
     <div>
-      <button
-        mat-raised-button
-        type="submit"
-        [disabled]="!invoiceForm.valid"
-        color="accent"
-      >
-        Save
-      </button>
+      <button mat-raised-button type="submit" [disabled]="!invoiceForm.valid" color="accent">Save</button>
       <button mat-raised-button type="reset">Reset</button>
     </div>
   </form>

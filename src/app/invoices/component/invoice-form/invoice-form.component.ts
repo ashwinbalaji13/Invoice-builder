@@ -15,18 +15,17 @@ export interface Food {
   styleUrls: ["./invoice-form.component.scss"]
 })
 export class InvoiceFormComponent implements OnInit {
-   invoice:Invoice;
+  invoice: Invoice;
   invoiceForm: FormGroup;
-  id:string;
-  foods: Food[] = [
-  ];
+  id: string;
+  foods: Food[] = [];
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private snackbar: MatSnackBar,
     private route: Router,
-    private activatedRouter:ActivatedRoute,
-    private clientService:ClientService
+    private activatedRouter: ActivatedRoute,
+    private clientService: ClientService
   ) {}
 
   ngOnInit() {
@@ -35,63 +34,62 @@ export class InvoiceFormComponent implements OnInit {
     this.setClient();
   }
   postData() {
-    if(this.invoice){
-      this.invoiceService.updateInvoiceById(this.id,this.invoiceForm.value).subscribe(
-        data=>{
+    if (this.invoice) {
+      this.invoiceService.updateInvoiceById(this.id, this.invoiceForm.value).subscribe(
+        data => {
           this.snackbar.open("Invoice Updated", "Success", {
             duration: 2000
           });
           this.invoiceForm.reset();
           console.log(data);
           this.route.navigate(["dashboard", "invoice"]);
-        }, err => {
+        },
+        err => {
           this.snackbar.open(err.message, "Failed", {
             duration: 5000
           });
           console.error(err);
         }
       );
-    }else{
-    this.invoiceService.postInvoices(this.invoiceForm.value).subscribe(
-      data => {
-        this.snackbar.open("Invoice Created", "Success", {
-          duration: 2000
-        });
-        this.invoiceForm.reset();
-        console.log(data);
-        this.route.navigate(["dashboard", "invoice"]);
-      },
-      err => {
-        this.snackbar.open(err.message, "Failed", {
-          duration: 5000
-        });
-        console.log(err);
-      }
-    );
-  }
+    } else {
+      this.invoiceService.postInvoices(this.invoiceForm.value).subscribe(
+        data => {
+          this.snackbar.open("Invoice Created", "Success", {
+            duration: 2000
+          });
+          this.invoiceForm.reset();
+          console.log(data);
+          this.route.navigate(["dashboard", "invoice"]);
+        },
+        err => {
+          this.snackbar.open(err.message, "Failed", {
+            duration: 5000
+          });
+          console.log(err);
+        }
+      );
+    }
     // console.log(JSON.stringify(this.invoiceForm.value));
   }
-  getInvoiceById(){
-    this.activatedRouter.params.subscribe(params=>{
-      this.id=params.id;
-      if(!this.id){
+  getInvoiceById() {
+    this.activatedRouter.params.subscribe(params => {
+      this.id = params.id;
+      if (!this.id) {
         return;
       }
-      this.invoiceService.getInvoiceById(this.id).subscribe(data=>{
+      this.invoiceService.getInvoiceById(this.id).subscribe(data => {
         // debugger;
-        this.invoice=data;
+        this.invoice = data;
         this.invoiceForm.patchValue(this.invoice);
-      })
-    })
+      });
+    });
   }
-  setClient(){
-    this.clientService.getClients().subscribe(result=>{
-        for(let i=0;i<result.length;i++){
-          this.foods.push({value: result[i]._id , viewValue: result[i].firstName+' '+result[i].lastName});
-        }
-debugger;
-
-    })
+  setClient() {
+    this.clientService.getClients().subscribe(result => {
+      for (let i = 0; i < result.length; i++) {
+        this.foods.push({ value: result[i]._id, viewValue: result[i].firstName + " " + result[i].lastName });
+      }
+    });
   }
   createForm() {
     this.invoiceForm = this.fb.group({
@@ -101,7 +99,7 @@ debugger;
       qty: "",
       rate: "",
       tax: "",
-      client:["", Validators.required]
+      client: ["", Validators.required]
     });
   }
 }

@@ -1,24 +1,27 @@
 <div mat-dialog-content>
-  <p>{{title}} </p>
-  <form class='form-container' [formGroup]="clientForm">
-  <mat-form-field> 
-    <input matInput formControlName="firstName" placeholder="Enter first name" /> 
-    <mat-error *ngIf="clientForm.controls.firstName.invalid && clientForm.controls.firstName.touched">
-        First Name is required</mat-error>
-  </mat-form-field>
-  <mat-form-field> 
-      <input matInput formControlName="lastName" placeholder="Enter last name" /> 
-      <mat-error *ngIf="clientForm.controls.lastName.invalid && clientForm.controls.lastName.touched">
-          Last Name is required</mat-error>
+  <p>{{ title }}</p>
+  <form class="form-container" [formGroup]="clientForm">
+    <mat-form-field>
+      <input matInput formControlName="firstName" placeholder="Enter first name" />
+      <mat-error *ngIf="clientForm.controls.firstName.invalid && clientForm.controls.firstName.touched">
+        First Name is required</mat-error
+      >
     </mat-form-field>
-    <mat-form-field> 
-        <input matInput formControlName="email" placeholder="Enter email" /> 
-        <mat-error *ngIf="clientForm.controls.email.invalid && clientForm.controls.email.touched">
-            Email is required</mat-error>
-      </mat-form-field>
-</form>
+    <mat-form-field>
+      <input matInput formControlName="lastName" placeholder="Enter last name" />
+      <mat-error *ngIf="clientForm.controls.lastName.invalid && clientForm.controls.lastName.touched">
+        Last Name is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Enter email" />
+      <mat-error *ngIf="clientForm.controls.email.invalid && clientForm.controls.email.touched">
+        Email is required</mat-error
+      >
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="clientForm.value" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [disabled]="!clientForm.valid" [mat-dialog-close]="clientForm.value" cdkFocusInitial>Save</button>
 </div>
