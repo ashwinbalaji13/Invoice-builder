@@ -66,7 +66,7 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "new invoice is created",
+            "description": "new client is created",
             "schema": {
               "$ref": "#definitions/Invoice"
             }
@@ -465,7 +465,17 @@
           "type": "string"
         }
       }
+    },"UserSignUp": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     },
+  
     "Authorization": {
       "required": ["Authorization"],
       "properties": {

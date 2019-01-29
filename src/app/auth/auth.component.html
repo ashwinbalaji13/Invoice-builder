@@ -1,0 +1,36 @@
+<div class="limiter">
+  <div class="container-login">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form class="form-container" [formGroup]="authForm" (ngSubmit)="postData()">
+          {{this.authForm.value |json}}
+
+        <mat-form-field>
+          <input matInput placeholder="Email" type="string" formControlName="email" required />
+          <mat-error *ngIf="authForm.controls.email.invalid && authForm.controls.email.touched">
+            Email is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" type="password" formControlName="password" required />
+          <mat-error *ngIf="authForm.controls.password.invalid && authForm.controls.password.touched">
+            password is required</mat-error
+          >
+        </mat-form-field>
+        <div>
+          <button mat-raised-button type="submit" [disabled]="!authForm.valid" color="accent">Save</button>
+          <button mat-raised-button type="reset">Reset</button>
+        </div>
+      </form>
+
+
+
+
+
+
+
+    </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -12,3 +12,4 @@ invoiceRouter
   .get(passport.authenticate("jwt", { session: "false" }), invoiceController.findOne)
   .delete(passport.authenticate("jwt", { session: "false" }), invoiceController.deleteRecord)
   .put(passport.authenticate("jwt", { session: "false" }), invoiceController.update);
+
