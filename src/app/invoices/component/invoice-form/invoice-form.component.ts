@@ -81,11 +81,16 @@ export class InvoiceFormComponent implements OnInit {
         return;
       }
       this.title="Edit Invoice";
-      this.invoiceService.getInvoiceById(this.id).subscribe(data => {
-        // debugger;
-        this.invoice = data;
-        this.invoiceForm.patchValue(this.invoice);
-      });
+      // this.invoiceService.getInvoiceById(this.id).subscribe(data => {
+      //   // debugger;
+      //   this.invoice = data;
+      //   this.invoiceForm.patchValue(this.invoice);
+      // });
+      this.activatedRouter.data.subscribe((data:{invoiceValue:Invoice})=>{
+          debugger;
+          this.invoice=data.invoiceValue;
+          this.invoiceForm.patchValue(this.invoice);
+    })
     });
   }
   setClient() {

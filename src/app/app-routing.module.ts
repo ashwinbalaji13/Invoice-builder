@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path:'signup',
   component:AuthComponent,
-  canActivate:[NoAuthGuardService]
+  canActivate:[NoAuthGuardService],
   },
   {
   path: 'dashboard',

@@ -3,5 +3,13 @@
 <!-- <mat-icon (click)="togglesideNav.emit()" class="sidenav-toggle">menu</mat-icon> -->
 <mat-icon (click)="togglesideNav.emit()" >menu</mat-icon>
     </button>
-    <span>Dashboard</span></mat-toolbar>
+    <span>Dashboard</span> 
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-bar">
+        <mat-icon>more_vert</mat-icon>
+      </button>   
+       <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+
+</mat-toolbar>
 
