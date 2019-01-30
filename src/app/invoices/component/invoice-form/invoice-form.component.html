@@ -30,7 +30,7 @@
 
     <mat-form-field>
       <mat-select placeholder="Please select your client" formControlName="client">
-        <mat-option *ngFor="let food of foods" [value]="food.value"> {{ food.viewValue }} </mat-option>
+        <mat-option *ngFor="let client of clients" [value]="client.value"> {{ client.viewValue }} </mat-option>
         <mat-error *ngIf="invoiceForm.controls.client.invalid && invoiceForm.controls.client.touched"
           >Client is required</mat-error
         >

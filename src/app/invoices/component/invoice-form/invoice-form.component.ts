@@ -5,7 +5,7 @@ import { MatSnackBar } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Invoice } from "src/app/invoices/models/invoice";
 import { ClientService } from "src/app/client/client.service";
-export interface Food {
+export interface Clients {
   value: String;
   viewValue: String;
 }
@@ -18,7 +18,7 @@ export class InvoiceFormComponent implements OnInit {
   invoice: Invoice;
   invoiceForm: FormGroup;
   id: string;
-  foods: Food[] = [];
+  clients: Clients[] = [];
   title;
   constructor(
     private fb: FormBuilder,
@@ -96,7 +96,7 @@ export class InvoiceFormComponent implements OnInit {
   setClient() {
     this.clientService.getClients().subscribe(result => {
       for (let i = 0; i < result.length; i++) {
-        this.foods.push({ value: result[i]._id, viewValue: result[i].firstName + " " + result[i].lastName });
+        this.clients.push({ value: result[i]._id, viewValue: result[i].firstName + " " + result[i].lastName });
       }
     });
   }
