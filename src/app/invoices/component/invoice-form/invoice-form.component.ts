@@ -19,6 +19,7 @@ export class InvoiceFormComponent implements OnInit {
   invoiceForm: FormGroup;
   id: string;
   foods: Food[] = [];
+  title;
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
@@ -35,6 +36,7 @@ export class InvoiceFormComponent implements OnInit {
   }
   postData() {
     if (this.invoice) {
+      this.title="Update Invoice";
       this.invoiceService.updateInvoiceById(this.id, this.invoiceForm.value).subscribe(
         data => {
           this.snackbar.open("Invoice Updated", "Success", {
@@ -75,8 +77,10 @@ export class InvoiceFormComponent implements OnInit {
     this.activatedRouter.params.subscribe(params => {
       this.id = params.id;
       if (!this.id) {
+        this.title="Create New Invoice";
         return;
       }
+      this.title="Edit Invoice";
       this.invoiceService.getInvoiceById(this.id).subscribe(data => {
         // debugger;
         this.invoice = data;

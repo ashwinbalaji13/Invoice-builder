@@ -1,11 +1,13 @@
 <div class="limiter">
   <div class="container-login">
     <mat-card>
-      <mat-card-title>Login</mat-card-title>
+      <mat-card-title>{{title}}</mat-card-title>
     <mat-card-content>
       <form class="form-container" [formGroup]="authForm" (ngSubmit)="postData()">
           {{this.authForm.value |json}}
-
+          <div class="loading-shade" *ngIf="progressBar">
+            <mat-spinner color="accent"></mat-spinner>s
+          </div>
         <mat-form-field>
           <input matInput placeholder="Email" type="string" formControlName="email" required />
           <mat-error *ngIf="authForm.controls.email.invalid && authForm.controls.email.touched">
@@ -19,18 +21,19 @@
           >
         </mat-form-field>
         <div>
-          <button mat-raised-button type="submit" [disabled]="!authForm.valid" color="accent">Save</button>
-          <button mat-raised-button type="reset">Reset</button>
+          <button mat-raised-button type="submit" [disabled]="!authForm.valid" color='warn'>{{title}}</button>
+          <button mat-raised-button type="reset" color="primary">Reset</button>
         </div>
       </form>
-
-
-
-
-
-
-
     </mat-card-content>
+    <div class="alternative" *ngIf="title==='Login'">
+      <p>Dont have an account</p>
+      <button mat-raised-button  color='warn' [routerLink]="'/signup'">Signup</button>
+    </div>
+    <div class="alternative" *ngIf="title==='Signup'">
+      <p>Already have an account</p>
+      <button mat-raised-button color='warn' [routerLink]="'/login'">Login</button>
+    </div>
     </mat-card>
   </div>
 </div>

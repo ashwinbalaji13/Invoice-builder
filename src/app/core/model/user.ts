@@ -3,3 +3,7 @@ export class User {
     email:String;
     password:String;
 }
+export class LoginRep{
+    success:string;
+    token:string
+}

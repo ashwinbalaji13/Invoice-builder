@@ -6,11 +6,13 @@ import { DashboardComponent } from "./dashboard.component";
 import { InvoiceListingComponent } from "../invoices/component/invoice-listing/invoice-listing.component";
 import { ClientListingComponent } from "../client/component/client-listing/client-listing.component";
 import { InvoiceFormComponent } from "src/app/invoices/component/invoice-form/invoice-form.component";
+import { AuthGuardService } from "../core/service/auth-guard.service";
 
 const routes: Routes = [
   {
     path: "",
     component: DashboardComponent,
+    canActivate:[AuthGuardService],
     children: [
       // {
       //   path: "",
@@ -18,23 +20,31 @@ const routes: Routes = [
       // },
       {
         path: "invoice",
-        component: InvoiceListingComponent
+        component: InvoiceListingComponent,
+        canActivateChild:[AuthGuardService],
       },
       {
         path: "clients",
-        component: ClientListingComponent
+        component: ClientListingComponent,
+        canActivateChild:[AuthGuardService]
       },
       {
         path: "invoice/new",
-        component: InvoiceFormComponent
+        component: InvoiceFormComponent,
+        canActivateChild:[AuthGuardService],
+
       },
       {
         path: "invoice/:id",
-        component: InvoiceFormComponent
+        component: InvoiceFormComponent,
+        canActivateChild:[AuthGuardService],
+
       },
       {
         path: "**",
-        redirectTo: "invoice"
+        redirectTo: "invoice",
+        canActivateChild:[AuthGuardService],
+
       }
     ]
   }
