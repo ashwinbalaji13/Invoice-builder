@@ -1,13 +1,14 @@
 import { Strategy, ExtractJwt } from "passport-jwt";
 import passport from "passport";
 import User from "../resources/users/users.models";
+import { devconfig } from "../../config/env/development";
 export const configureJWTStrategy = () => {
   var opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-  opts.secretOrKey = "ahgd123";
+  opts.secretOrKey = devconfig.secret;
   passport.use(
     new Strategy(opts, function(jwt_payload, done) {
-      console.log(jwt_payload);
+      // console.log(jwt_payload);
       User.findOne({ _id: jwt_payload.id }, function(err, user) {
         if (err) {
           return done(err, false);
@@ -24,11 +25,4 @@ export const configureJWTStrategy = () => {
     })
   );
 
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-
-  passport.deserializeUser(function(user, done) {
-    done(null, user);
-  });
 };
