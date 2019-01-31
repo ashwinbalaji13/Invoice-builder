@@ -6,7 +6,7 @@ import { Client } from "./models/client";
 const BASE_URL = "http://localhost:3000/api";
 @Injectable()
 export class ClientService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
   getClients(): Observable<Client[]> {
     return this.httpClient.get<Client[]>(`${BASE_URL}/clients`);
   }
@@ -16,8 +16,8 @@ export class ClientService {
   getClientById(id): Observable<Client> {
     return this.httpClient.get<Client>(`${BASE_URL}/clients/${id}`);
   }
-  updateClient(id,body): Observable<Client> {
-    return this.httpClient.put<Client>(`${BASE_URL}/clients/${id}`,body);
+  updateClient(id, body): Observable<Client> {
+    return this.httpClient.put<Client>(`${BASE_URL}/clients/${id}`, body);
   }
   deleteClient(id): Observable<Client> {
     return this.httpClient.delete<Client>(`${BASE_URL}/clients/${id}`);

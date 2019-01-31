@@ -6,7 +6,7 @@ import { Invoice, InvoicePaginationRsp } from "../models/invoice";
 const BASE_URL = "http://localhost:3000/api";
 @Injectable()
 export class InvoiceService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
   getInvoices(data): Observable<InvoicePaginationRsp> {
     // debugger;
     let query = `${BASE_URL}/invoices?page=${data.page + 1}&limit=${data.perPage}`;

@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-export const authRouter=express.Router();
+export const authRouter = express.Router();
 
 
 authRouter.get('/google',
@@ -11,9 +11,10 @@ authRouter.get('/google',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-authRouter.get('/google/callback', 
+authRouter.get('/google/callback',
   passport.authenticate('google'),
-  function(req, res) {
-    console.log("inside authrouter.router",req);
-    res.redirect('/');
+  function (req, res) {
+    console.log("inside authrouter.router");
+    // res.redirect('/');
+    res.json({ mes: "succes login" })
   });

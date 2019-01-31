@@ -13,19 +13,27 @@
     {
       "name": "invoices",
       "description": "API for invoice"
-    },{
-      "name":"clients",
+    },
+    {
+      "name": "clients",
       "description": "API for clients"
-
     }
   ],
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/invoices": {
       "post": {
-        "tags": ["invoices"],
+        "tags": [
+          "invoices"
+        ],
         "summary": "create new invoice",
         "description": "create new invoice in the system",
         "parameters": [
@@ -34,10 +42,14 @@
             "description": "Invoice creation",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#definitions/Invoice" }
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "new invoice is created",
@@ -48,7 +60,9 @@
         }
       },
       "get": {
-        "tags": ["invoices"],
+        "tags": [
+          "invoices"
+        ],
         "summary": "getting all invoices data from db",
         "description": "all invoices",
         "parameters": [
@@ -95,7 +109,9 @@
         }
       ],
       "get": {
-        "tags": ["invoices"],
+        "tags": [
+          "invoices"
+        ],
         "description": "Find the Invoice by id",
         "summary": "Find single Invoice",
         "responses": {
@@ -108,7 +124,9 @@
         }
       },
       "delete": {
-        "tags": ["invoices"],
+        "tags": [
+          "invoices"
+        ],
         "description": "Delete the Invoice by id",
         "summary": "Delete single Invoice",
         "responses": {
@@ -121,7 +139,9 @@
         }
       },
       "put": {
-        "tags": ["invoices"],
+        "tags": [
+          "invoices"
+        ],
         "summary": "Update an Invoice",
         "description": "Update Invoice in the System",
         "parameters": [
@@ -135,7 +155,9 @@
             }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Invoice is updated",
@@ -145,9 +167,12 @@
           }
         }
       }
-    },"/clients": {
+    },
+    "/clients": {
       "post": {
-        "tags": ["clients"],
+        "tags": [
+          "clients"
+        ],
         "summary": "create new client",
         "description": "create new invoice in the system",
         "parameters": [
@@ -156,10 +181,14 @@
             "description": "Client creation",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#definitions/Clients" }
+            "schema": {
+              "$ref": "#definitions/Clients"
+            }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "new client is created",
@@ -170,7 +199,9 @@
         }
       },
       "get": {
-        "tags": ["clients"],
+        "tags": [
+          "clients"
+        ],
         "summary": "getting all clients data from db",
         "description": "all clients",
         "responses": {
@@ -190,7 +221,9 @@
         }
       ],
       "get": {
-        "tags": ["clients"],
+        "tags": [
+          "clients"
+        ],
         "description": "Find the Clients by id",
         "summary": "Find single Clients",
         "responses": {
@@ -203,7 +236,9 @@
         }
       },
       "delete": {
-        "tags": ["clients"],
+        "tags": [
+          "clients"
+        ],
         "description": "Delete the Client by id",
         "summary": "Delete single Client",
         "responses": {
@@ -216,7 +251,9 @@
         }
       },
       "put": {
-        "tags": ["clients"],
+        "tags": [
+          "clients"
+        ],
         "summary": "Update an Invoice",
         "description": "Update Invoice in the System",
         "parameters": [
@@ -230,7 +267,9 @@
             }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Client is updated",
@@ -244,7 +283,11 @@
   },
   "definitions": {
     "Invoice": {
-      "required": ["item", "qty", "date"],
+      "required": [
+        "item",
+        "qty",
+        "date"
+      ],
       "properties": {
         "_id": {
           "type": "string",
@@ -321,8 +364,13 @@
           "type": "integer"
         }
       }
-    }, "Clients": {
-      "required": ["firstName", "lastName", "email"],
+    },
+    "Clients": {
+      "required": [
+        "firstName",
+        "lastName",
+        "email"
+      ],
       "properties": {
         "firstName": {
           "type": "string"
@@ -341,7 +389,7 @@
           "type": "string"
         },
         "lastName": {
-          "type": "string"        
+          "type": "string"
         },
         "email": {
           "type": "string"

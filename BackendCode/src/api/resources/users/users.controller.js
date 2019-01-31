@@ -3,7 +3,6 @@ import Users from "./users.models";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userService from "./users.service.js";
-import { Test } from "tslint";
 
 export default {
   async signup(req, res) {
