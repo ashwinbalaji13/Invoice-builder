@@ -4,28 +4,31 @@ import passport from "passport";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../../config/swagger.json";
 import { configureJWTStrategy } from "./passport-jwt.js";
-import { configureGoogleStrategy } from './passport-google'
-import session from 'express-session';
+import { configureGoogleStrategy } from "./passport-google";
+import session from "express-session";
 import { devconfig } from "../../config/env/development.js";
 
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
-  //passport 
+  //passport
   app.use(passport.initialize());
   configureJWTStrategy();
   //google auth
   app.use(passport.session());
   configureGoogleStrategy();
-  app.use(session({
-    secret: devconfig.secret,
-    resave: false,
-    saveUninitialized: true,
-  }))
-  passport.serializeUser(function (user, done) {
+  app.use(
+    session({
+      secret: devconfig.secret,
+      resave: false,
+      saveUninitialized: true
+    })
+  );
+  passport.serializeUser(function(user, done) {
+    console.log("serialize");
     done(null, user.id);
   });
-  passport.deserializeUser(function (user, done) {
-    console.log("user", { id: "Asdfsdfdsfdsf" })
+  passport.deserializeUser(function(user, done) {
+    console.log("deserialize");
     done(null, { id: "Asdfsdfdsfdsf" });
   });
   app.use(express.json());
@@ -37,7 +40,7 @@ export const setGlobalMiddleware = app => {
       explorer: true
     })
   );
-  app.use(function (req, res, next) {
+  app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();

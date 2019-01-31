@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger.json";
 import { restRouter } from "./api/index.js";
 import { setGlobalMiddleware } from "./api/middlewares/global-middleware";
+import { devconfig } from "../src/config/env/development";
 let app = express();
 
 mongoose.Promise = global.Promise;
@@ -38,6 +39,6 @@ app.use((error, req, res, next) => {
     }
   });
 });
-app.listen(8000, () => {
+app.listen(devconfig.port, () => {
   console.log("listening to port 3000");
 });
