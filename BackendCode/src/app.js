@@ -11,8 +11,8 @@ let app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  // "mongodb://localhost/invoice-builder",
-  "mongodb://ashwin:ashwin13@ds117545.mlab.com:17545/invoice_builder",
+  "mongodb://localhost/invoice-builder",
+  // "mongodb://ashwin:ashwin13@ds117545.mlab.com:17545/invoice_builder",
   { useNewUrlParser: true, useCreateIndex: true }
 );
 setGlobalMiddleware(app);

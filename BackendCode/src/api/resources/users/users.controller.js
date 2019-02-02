@@ -11,7 +11,14 @@ export default {
       return res.status(HttpServerCodes.BAD_REQUEST).json(error);
     }
     try {
-      let result = await Users.create(value);
+      let user = new Users({});
+      user.local.email = value.email;
+      const salt = await bcryptjs.genSalt();
+      value.password = await bcryptjs.hash(value.password, salt);
+      user.local.password = value.password;
+      await user.save();
+      console.log("Signup user");
+      // let result = await Users.create(value);
       return res.json({ success: true, message: "User Created successfully" });
     } catch (err) {
       res.status(HttpServerCodes.INTERNAL_SERVER_ERROR).json({ err: err });
@@ -23,11 +30,14 @@ export default {
       return res.status(HttpServerCodes.BAD_REQUEST).json(error);
     }
     try {
-      const user = await Users.findOne({ email: value.email });
+      console.log("login", value);
+
+      const user = await Users.findOne({ "local.email": value.email });
+      console.log("login", user);
       if (!user) {
         return res.status(HttpServerCodes.BAD_REQUEST).json({ err: "Invalid Email or email not exist" });
       }
-      const matched = await bcryptjs.compare(value.password, user.password);
+      const matched = await bcryptjs.compare(value.password, user.local.password);
       // const matched = false;
       console.log("matched", matched);
       if (!matched) {

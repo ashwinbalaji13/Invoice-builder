@@ -7,6 +7,7 @@ import { configureJWTStrategy } from "./passport-jwt.js";
 import { configureGoogleStrategy } from "./passport-google";
 import session from "express-session";
 import { devconfig } from "../../config/env/development.js";
+import usersModels from "../resources/users/users.models.js";
 
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
@@ -23,13 +24,17 @@ export const setGlobalMiddleware = app => {
       saveUninitialized: true
     })
   );
+  //save user into session
   passport.serializeUser(function(user, done) {
-    console.log("serialize");
+    console.log("serialize", user.displayName);
     done(null, user.id);
   });
+  //extract userid from session
   passport.deserializeUser(function(user, done) {
-    console.log("deserialize");
-    done(null, { id: "Asdfsdfdsfdsf" });
+    console.log("deserialize", user);
+    usersModels.findById(id, (err, user) => {
+      done(null, user);
+    });
   });
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -44,5 +49,8 @@ export const setGlobalMiddleware = app => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
+  });
+  app.get("/failure", (req, res) => {
+    res.redirect("http://localhost:4200/login");
   });
 };

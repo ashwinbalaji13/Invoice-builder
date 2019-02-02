@@ -11,6 +11,10 @@
   "swagger": "2.0",
   "tags": [
     {
+      "name": "users",
+      "description": "API for Users"
+    },
+    {
       "name": "invoices",
       "description": "API for invoice"
     },
@@ -29,6 +33,63 @@
     "application/json"
   ],
   "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Login for user",
+        "description": "Login for user",
+        "parameters": [
+          {
+            "name": "User Login",
+            "description": "User Login",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Users"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": "#definitions/UserLogin"
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create new user",
+        "description": "create new user in the system",
+        "parameters": [
+          {
+            "name": "Create User",
+            "description": "User creation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Users"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "new client is created",
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
+          }
+        }
+      }
+    },
     "/invoices": {
       "post": {
         "tags": [
@@ -44,6 +105,15 @@
             "required": true,
             "schema": {
               "$ref": "#definitions/Invoice"
+            }
+          },
+          {
+            "name": "Authorization",
+            "description": "Access token to autherize the user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Authorization"
             }
           }
         ],
@@ -89,6 +159,15 @@
             "type": "string",
             "description": "Mention asc or desc",
             "in": "query"
+          },
+          {
+            "name": "Authorization",
+            "description": "Access token to autherize the user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Authorization"
+            }
           }
         ],
         "responses": {
@@ -105,6 +184,13 @@
           "name": "id",
           "in": "path",
           "description": "Id of the Invoice",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "description": "Access token to autherize the user",
+          "in": "header",
+          "required": true,
           "type": "string"
         }
       ],
@@ -184,6 +270,15 @@
             "schema": {
               "$ref": "#definitions/Clients"
             }
+          },
+          {
+            "name": "Authorization",
+            "description": "Access token to autherize the user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Authorization"
+            }
           }
         ],
         "produces": [
@@ -204,6 +299,17 @@
         ],
         "summary": "getting all clients data from db",
         "description": "all clients",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Access token to autherize the user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -218,6 +324,15 @@
           "in": "path",
           "description": "Id of the Clients",
           "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "description": "Access token to autherize the user",
+          "in": "header",
+          "required": true,
+          "schema": {
+            "$ref": "#definitions/Authorization"
+          }
         }
       ],
       "get": {
@@ -392,6 +507,50 @@
           "type": "string"
         },
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLogin": {
+      "properties": {
+        "success": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "UserSignUp": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Authorization": {
+      "required": [
+        "Authorization"
+      ],
+      "properties": {
+        "Authorization": {
           "type": "string"
         }
       }
