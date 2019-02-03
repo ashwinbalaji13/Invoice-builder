@@ -8,6 +8,7 @@ import { configureGoogleStrategy } from "./passport-google";
 import session from "express-session";
 import { devconfig } from "../../config/env/development.js";
 import usersModels from "../resources/users/users.models.js";
+import { configureGitHubStrategy } from "./passport-github.js";
 
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
@@ -17,6 +18,7 @@ export const setGlobalMiddleware = app => {
   //google auth
   app.use(passport.session());
   configureGoogleStrategy();
+  configureGitHubStrategy();
   app.use(
     session({
       secret: devconfig.secret,

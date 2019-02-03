@@ -15,3 +15,11 @@ authRouter.get(
   passport.authenticate("google", { failureRedirect: "/failure" }),
   authController.sendJWTToken
 );
+
+//github
+authRouter.get("/github", passport.authenticate("github"));
+
+authRouter.get("/github/callback", passport.authenticate("github", { failureRedirect: "/login" }), function(req, res) {
+  // Successful authentication, redirect home.
+  authController.sendJWTToken(req, res);
+});

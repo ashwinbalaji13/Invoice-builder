@@ -12,6 +12,12 @@ const UsersSchema = new Schema({
     id: String,
     displayName: String,
     token: String
+  },
+  github: {
+    email: String,
+    id: String,
+    displayName: String,
+    token: String
   }
 });
 // UsersSchema.pre("save", async function() {
