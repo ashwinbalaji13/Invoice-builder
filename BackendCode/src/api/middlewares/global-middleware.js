@@ -9,6 +9,7 @@ import session from "express-session";
 import { devconfig } from "../../config/env/development.js";
 import usersModels from "../resources/users/users.models.js";
 import { configureGitHubStrategy } from "./passport-github.js";
+import { configureTwitterStrategy } from "./passport-twitter.js";
 
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
@@ -19,6 +20,8 @@ export const setGlobalMiddleware = app => {
   app.use(passport.session());
   configureGoogleStrategy();
   configureGitHubStrategy();
+  configureTwitterStrategy();
+
   app.use(
     session({
       secret: devconfig.secret,

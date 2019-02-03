@@ -11,5 +11,10 @@ export const devconfig = {
     clientID: "d3420b21c328dd62bd35",
     clientSecret: "548c1f462c8f936e72e67fba95fe1def533ad36d",
     callbackURL: "http://localhost:3000/api/auth/github/callback"
+  },
+  twitter: {
+    consumerKey: "qCMogLEF2JreTCnMHmvWTff25",
+    consumerSecret: "i55kjyjSpRnEhokyp5Ad55ac6zynljMv6XG4rwfxvqF5ckrAYA",
+    callbackURL: "http://localhost:3000/api/auth/twitter/callback"
   }
 };

@@ -18,6 +18,12 @@ const UsersSchema = new Schema({
     id: String,
     displayName: String,
     token: String
+  },
+  twitter: {
+    name: String,
+    id: String,
+    displayName: String,
+    token: String
   }
 });
 // UsersSchema.pre("save", async function() {

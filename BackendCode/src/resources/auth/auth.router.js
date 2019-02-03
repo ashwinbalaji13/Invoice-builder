@@ -23,3 +23,11 @@ authRouter.get("/github/callback", passport.authenticate("github", { failureRedi
   // Successful authentication, redirect home.
   authController.sendJWTToken(req, res);
 });
+
+authRouter.get("/twitter", passport.authenticate("twitter"));
+
+authRouter.get(
+  "/twitter/callback",
+  passport.authenticate("twitter", { failureRedirect: "/login" }),
+  authController.sendJWTToken
+);

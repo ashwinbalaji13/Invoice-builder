@@ -19,16 +19,14 @@ export const configureGoogleStrategy = () => {
         console.log("passport google end");
         let user = await User.findOne({ "google.id": profile.id });
         if (user) {
-          console.log("user", user);
+          // console.log("user", user);
           return done(null, user);
         }
-        console.log("before creatiomn");
         let newuser = new User({});
         newuser.google.id = profile.id;
         newuser.google.token = token;
         newuser.google.displayName = profile.displayName;
         newuser.google.email = profile.emails[0].value;
-        console.log("After creation", newuser);
         await newuser.save();
         // console.log(newuser);
         done(null, profile);
