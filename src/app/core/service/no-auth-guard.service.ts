@@ -4,7 +4,6 @@ import { CanActivate } from '@angular/router';
 @Injectable()
 export class NoAuthGuardService implements CanActivate{
   canActivate():boolean{
-  debugger;
     return true;
   }
   constructor() { }

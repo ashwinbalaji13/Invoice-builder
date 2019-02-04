@@ -13,4 +13,7 @@ export class AuthService {
   signup(user:User):Observable<User>{
     return this.httpClient.post<User>(`${environment.apiUrl}/users/signup`,user);
   }
+  googleAuth(): Observable<LoginRep> {
+    return this.httpClient.get<LoginRep>(`${environment.apiUrl}/auth/google`);
+  }
 }
