@@ -1,43 +1,58 @@
 <div class="limiter">
   <div class="container-login">
     <mat-card>
-      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-title>{{ title }}</mat-card-title>
       <mat-card-content>
         <form class="form-container" [formGroup]="authForm" (ngSubmit)="postData()">
-          {{this.authForm.value |json}}
-          <div class="loading-shade" *ngIf="progressBar">
-            <mat-spinner color="accent"></mat-spinner>s
-          </div>
+          <!-- {{this.authForm.value |json}} -->
+          <div class="loading-shade" *ngIf="progressBar"><mat-spinner color="accent"></mat-spinner>s</div>
           <mat-form-field>
             <input matInput placeholder="Email" type="string" formControlName="email" required />
             <mat-error *ngIf="authForm.controls.email.invalid && authForm.controls.email.touched">
-              Email is required</mat-error>
+              Email is required</mat-error
+            >
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Password" type="password" formControlName="password" required />
             <mat-error *ngIf="authForm.controls.password.invalid && authForm.controls.password.touched">
-              password is required</mat-error>
+              password is required</mat-error
+            >
           </mat-form-field>
           <div>
-            <button mat-raised-button type="submit" [disabled]="!authForm.valid" color='warn'>{{title}}</button>
-            <button mat-raised-button type="reset" color="primary">Reset</button>
+            <button mat-raised-button type="submit" class="btn-block" [disabled]="!authForm.valid" color="warn">
+              {{ title }}
+            </button>
+            <button mat-raised-button type="reset" class="btn-block" color="primary">Reset</button>
           </div>
-
         </form>
-        <div>
-          <a href="/api/auth/google" mat-raised-button>Google</a>
-          <a href="/api/auth/twitter" mat-raised-button>Twitter</a>
-          <a href="/api/auth/github" mat-raised-button>Github</a>
+        <div style="text-align:center;margin-top:10px">Or Sign in with</div>
 
+        <div>
+          <!-- <a href="/api/auth/google" mat-raised-button>Google</a>
+          <a href="/api/auth/twitter" mat-raised-button>Twitter</a>
+          <a href="/api/auth/github" mat-raised-button>Github</a> -->
+          <a href="/api/auth/google" class="btn btn-social btn-block btn-google" mat-button>
+            <i class="fa fa-google"></i>
+            Google
+          </a>
+          <a href="/api/auth/twitter" class="btn btn-social btn-block btn-twitter" mat-button>
+            <i class="fa fa-twitter"></i>
+            Twitter
+          </a>
+
+          <a href="/api/auth/github" class="btn btn-social btn-block btn-github" mat-button>
+            <i class="fa fa-github"></i>
+            Github
+          </a>
         </div>
       </mat-card-content>
-      <div class="alternative" *ngIf="title==='Login'">
+      <div class="alternative" *ngIf="title === 'Login'">
         <p>Dont have an account</p>
-        <button mat-raised-button color='warn' [routerLink]="'/signup'">Signup</button>
+        <button mat-raised-button class="btn-block" color="warn" [routerLink]="'/signup'">Signup</button>
       </div>
-      <div class="alternative" *ngIf="title==='Signup'">
+      <div class="alternative" *ngIf="title === 'Signup'">
         <p>Already have an account</p>
-        <button mat-raised-button color='warn' [routerLink]="'/login'">Login</button>
+        <button mat-raised-button class="btn-block" color="warn" [routerLink]="'/login'">Login</button>
       </div>
     </mat-card>
   </div>
