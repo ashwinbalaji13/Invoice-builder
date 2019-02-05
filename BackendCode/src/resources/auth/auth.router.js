@@ -19,7 +19,7 @@ authRouter.get(
 //github
 authRouter.get("/github", passport.authenticate("github"));
 
-authRouter.get("/github/callback", passport.authenticate("github", { failureRedirect: "/login" }), function(req, res) {
+authRouter.get("/github/callback", passport.authenticate("github", { failureRedirect: "/login" }), function (req, res) {
   // Successful authentication, redirect home.
   authController.sendJWTToken(req, res);
 });
@@ -31,3 +31,4 @@ authRouter.get(
   passport.authenticate("twitter", { failureRedirect: "/login" }),
   authController.sendJWTToken
 );
+authRouter.get('/authenticate', passport.authenticate("jwt", { session: "false" }), authController.authenticate)

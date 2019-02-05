@@ -10,7 +10,7 @@ import { devconfig } from "../../config/env/development.js";
 import usersModels from "../resources/users/users.models.js";
 import { configureGitHubStrategy } from "./passport-github.js";
 import { configureTwitterStrategy } from "./passport-twitter.js";
-
+import cors from 'cors';
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
   //passport
@@ -30,12 +30,12 @@ export const setGlobalMiddleware = app => {
     })
   );
   //save user into session
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser(function (user, done) {
     console.log("serialize", user.displayName);
     done(null, user.id);
   });
   //extract userid from session
-  passport.deserializeUser(function(user, done) {
+  passport.deserializeUser(function (user, done) {
     console.log("deserialize", user);
     usersModels.findById(id, (err, user) => {
       done(null, user);
@@ -50,11 +50,7 @@ export const setGlobalMiddleware = app => {
       explorer: true
     })
   );
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+  app.use(cors());
   app.get("/failure", (req, res) => {
     res.redirect("http://localhost:4200/login");
   });
