@@ -10,7 +10,7 @@ import { devconfig } from "../../config/env/development.js";
 import usersModels from "../resources/users/users.models.js";
 import { configureGitHubStrategy } from "./passport-github.js";
 import { configureTwitterStrategy } from "./passport-twitter.js";
-import cors from "cors";
+// import cors from "cors";
 export const setGlobalMiddleware = app => {
   app.use(logger("dev"));
   //passport
@@ -21,6 +21,16 @@ export const setGlobalMiddleware = app => {
   configureGoogleStrategy();
   configureGitHubStrategy();
   configureTwitterStrategy();
+
+  var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'example.com');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    console.log("cors");
+
+    next();
+  }
+  app.use(allowCrossDomain);
 
   app.use(
     session({
@@ -50,7 +60,7 @@ export const setGlobalMiddleware = app => {
       explorer: true
     })
   );
-  app.use(cors());
+  // app.use(cors());
   app.get("/failure", (req, res) => {
     res.redirect("http://localhost:4200/login");
   });

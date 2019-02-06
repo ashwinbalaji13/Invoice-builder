@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, LoginRep } from '../model/user';
+import { User, LoginRep, Logout } from '../model/user';
 import { environment } from '../../../environments/environment'
 import { Observable } from 'rxjs';
 @Injectable()
@@ -17,13 +17,17 @@ export class AuthService {
     return this.httpClient.get<LoginRep>(`${environment.apiUrl}/auth/google`);
   }
   isAunthenticate(token): Observable<boolean> {
-    const headers = {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      })
-    }
+    // const headers = {
+    //   headers: new HttpHeaders({
+    //     'content-type': 'application/json',
+    //     'Authorization': `Bearer ${token}`
+    //   })
+    // }
     console.log("service");
-    return this.httpClient.get<boolean>(`${environment.apiUrl}/auth/authenticate`, headers);
+    return this.httpClient.get<boolean>(`${environment.apiUrl}/auth/authenticate`);
+  }
+  logout(): Observable<Logout> {
+    console.log("service");
+    return this.httpClient.get<Logout>(`${environment.apiUrl}/auth/logout`);
   }
 }

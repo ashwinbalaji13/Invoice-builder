@@ -11,5 +11,10 @@ export default {
   authenticate(req, res) {
     console.log("authenticate");
     res.send(true);
+  },
+  logout(req, res) {
+    console.log("logout");
+    req.logout();
+    res.send(true);
   }
 };

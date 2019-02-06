@@ -7,3 +7,6 @@ export class LoginRep{
     success:string;
     token:string
 }
+export interface Logout{
+    success:string;
+}

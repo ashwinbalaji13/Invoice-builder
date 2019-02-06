@@ -32,3 +32,5 @@ authRouter.get(
   authController.sendJWTToken
 );
 authRouter.get('/authenticate', passport.authenticate("jwt", { session: "false" }), authController.authenticate)
+authRouter.get('/logout',passport.authenticate("jwt", { session: "false" }), authController.logout)
+// authRouter.get('/logout',authController.logout)

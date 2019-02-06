@@ -6,6 +6,8 @@ import { MaterialModule } from "./shared/material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpInterceptorService } from "./core/service/http-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,9 +15,11 @@ import { CoreModule } from "./core/core.module";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule,AuthModule,CoreModule
+    MaterialModule,AuthModule,CoreModule,HttpClientModule
   ],
-  providers: [],
+  providers:[{
+    provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorService,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

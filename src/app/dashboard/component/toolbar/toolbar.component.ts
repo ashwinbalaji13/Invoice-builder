@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { JwtService } from 'src/app/core/jwt.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,13 +12,21 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   @Output() togglesideNav= new EventEmitter<void>();
-  constructor(private jwtService:JwtService,private route:Router) { }
+  constructor(private jwtService:JwtService,private route:Router,private authService:AuthService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
   }
   logout(){
-    this.jwtService.destroyToken();
-    this.route.navigate(['login']);
+    this.authService.logout().subscribe((data)=>{
+    },(err)=>{
+      this.snackbar.open(err.message, "Failed", {
+        duration: 5000
+      });
+    },()=>{
+      this.jwtService.destroyToken();
+      this.route.navigate(['login']);
+    });  
+ 
   }
 
 }

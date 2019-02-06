@@ -14,9 +14,6 @@ import { HttpInterceptorService } from "../core/service/http-interceptor.service
 
 @NgModule({
   imports: [CommonModule, DashboardRoutingModule, MaterialModule, InvoicesModule, ClientModule],
-  declarations: [DashboardComponent, MainContentComponent, SideNavComponent, ToolbarComponent],
-  providers:[{
-    provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorService,multi:true
-  }]
+  declarations: [DashboardComponent, MainContentComponent, SideNavComponent, ToolbarComponent]
 })
 export class DashboardModule {}
